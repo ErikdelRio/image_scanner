@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class ImageWhitener {
+public class ImageWhiter {
     public static void main(String args[])throws IOException {
         BufferedImage img = null;
         File f = null;
@@ -150,10 +150,10 @@ public class ImageWhitener {
     }
 
     public static int menornxn(BufferedImage img, int x, int y, int tam) {
-        // int menor = to_rgb(255, 255, 255);
-        int min_r = 255;
-        int min_g = 255;
-        int min_b = 255;
+        int menor = to_rgb(255, 255, 255);
+        // int min_r = 255;
+        // int min_g = 255;
+        // int min_b = 255;
 
         for(int i = x; i < x+tam && i < img.getWidth(); i++) {
             for(int j = y; j < y+tam && j < img.getHeight(); j++) {
@@ -162,39 +162,32 @@ public class ImageWhitener {
                 int r = (color>>16) & 0xff;
                 int g = (color>>8) & 0xff;
                 int b = color & 0xff;
-                // if (color < menor) {
-                //     menor = color;
-                // }
-                min_r = Math.min(min_r, r);
-                min_g = Math.min(min_g, g);
-                min_b = Math.min(min_b, b);
+                if (color < menor) {
+                    menor = color;
+                }
+                // min_r = Math.min(min_r, r);
+                // min_g = Math.min(min_g, g);
+                // min_b = Math.min(min_b, b);
             }
         }
-        return to_rgb(min_r, min_g, min_b);
+        return menor;
     }
     public static int mayornxn(BufferedImage img, int x, int y, int tam) {
-        // int mayor = to_rgb(0, 0, 0);
+        int mayor = to_rgb(0, 0, 0);
 
-        int max_r = 0;
-        int max_g = 0;
-        int max_b = 0;
+        // int min_r = 255;
+        // int min_g = 255;
+        // int min_b = 255;
         for(int i = x; i < x+tam && i < img.getWidth(); i++) {
             for(int j = y; j < y+tam && j < img.getHeight(); j++) {
                 int color = img.getRGB(i, j);
 
-                int r = (color>>16) & 0xff;
-                int g = (color>>8) & 0xff;
-                int b = color & 0xff;
-                // if (color > mayor) {
-                //     mayor = color;
-                // }
-
-                max_r = Math.max(max_r, r);
-                max_g = Math.max(max_g, g);
-                max_b = Math.max(max_b, b);
+                if (color > mayor) {
+                    mayor = color;
+                }
             }
         }
-        return to_rgb(max_r, max_g, max_b);
+        return mayor;
     }
 
     public static int dispersion(int x, int max, int min) {
