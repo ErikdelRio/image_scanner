@@ -134,9 +134,9 @@ public class ImageWhiter {
 
                 float mitad_pixel = (r + g + b)/3;
                 int nuevo = to_rgb(
-                    dispersion(r, min_r, max_r),
-                    dispersion(g, min_g, max_r),
-                    dispersion(b, min_b, max_r));
+                    dispersion(r, menor, mayor),
+                    dispersion(g, menor, mayor),
+                    dispersion(b, menor, mayor));
                 // if (mitad_pixel > mitad) {
                 //     nuevo = to_rgb(255,255,255);
                 //     // System.out.println("blanco");
@@ -151,33 +151,19 @@ public class ImageWhiter {
 
     public static int menornxn(BufferedImage img, int x, int y, int tam) {
         int menor = to_rgb(255, 255, 255);
-        // int min_r = 255;
-        // int min_g = 255;
-        // int min_b = 255;
-
         for(int i = x; i < x+tam && i < img.getWidth(); i++) {
             for(int j = y; j < y+tam && j < img.getHeight(); j++) {
                 int color = img.getRGB(i, j);
 
-                int r = (color>>16) & 0xff;
-                int g = (color>>8) & 0xff;
-                int b = color & 0xff;
                 if (color < menor) {
                     menor = color;
                 }
-                // min_r = Math.min(min_r, r);
-                // min_g = Math.min(min_g, g);
-                // min_b = Math.min(min_b, b);
             }
         }
         return menor;
     }
     public static int mayornxn(BufferedImage img, int x, int y, int tam) {
-        int mayor = to_rgb(0, 0, 0);
-
-        // int min_r = 255;
-        // int min_g = 255;
-        // int min_b = 255;
+        int mayor = to_rgb(255, 255, 255);
         for(int i = x; i < x+tam && i < img.getWidth(); i++) {
             for(int j = y; j < y+tam && j < img.getHeight(); j++) {
                 int color = img.getRGB(i, j);
